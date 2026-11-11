@@ -24,10 +24,6 @@
 
     <figure class="hcp-sps__card">
       <img class="hcp-sps__photo" alt="" decoding="async">
-      <figcaption class="hcp-sps__caption">
-        <span class="hcp-sps__name"></span>
-        <span class="hcp-sps__biz"></span>
-      </figcaption>
     </figure>
 
     <div class="hcp-sps__body">
@@ -122,11 +118,6 @@
 .hcp-sps__card{grid-area:card; position:relative; margin:0; border-radius:8px; overflow:hidden;
   aspect-ratio:3/2; background:#0E2747; box-shadow:0 24px 60px rgba(4,16,36,.35)}
 .hcp-sps__photo{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block}
-.hcp-sps__caption{position:absolute; inset:auto 0 0 0; padding:clamp(56px,7vw,96px) clamp(16px,2vw,28px) clamp(16px,2vw,26px);
-  background:linear-gradient(to top, rgba(10,14,18,.82) 0%, rgba(10,14,18,.55) 45%, rgba(10,14,18,0) 100%);
-  display:flex; flex-direction:column; gap:4px; color:#fff}
-.hcp-sps__name{font-weight:800; font-size:clamp(24px,2.5vw,34px); line-height:1.1; font-family:inherit}
-.hcp-sps__biz{font-weight:500; font-size:clamp(15px,1.4vw,19px); line-height:1.3; font-family:inherit; opacity:.95}
 
 @media (max-width:860px){
   .hcp-sps__inner{grid-template-columns:minmax(0,1fr); grid-template-areas:"title" "card" "body"; grid-template-rows:auto; min-height:0}
@@ -251,7 +242,7 @@
       var secs = [1, 2, 3].map(function(i){ return { h: txt(r['section' + i + 'heading']), p: txt(r['section' + i + 'text']) }; })
         .filter(function(s){ return s.h || s.p; });
       return {
-        name: txt(r.fullname), card: txt(r.cardname) || txt(r.fullname), first: txt(r.buttonname) || txt(r.fullname).split(' ')[0],
+        name: txt(r.fullname), first: txt(r.buttonname) || txt(r.fullname).split(' ')[0],
         business: txt(r.business), location: txt(r.location), trade: txt(r.trade), role: txt(r.role),
         years: txt(r.yearsinbusiness), techs: txt(r.technicians), quote: unquote(r.spotlightquote), blurb: txt(r.spotlightblurb), headshot: txt(r.headshotfile),
         image: txt(r.imagefile), focus: txt(r.imagefocus) || '50% 40%', intro: txt(r.storyintro),
@@ -278,8 +269,6 @@
     var ph = $('.hcp-sps__photo');
     ph.src = imgUrl(p.image); ph.style.objectPosition = p.focus;
     ph.alt = p.name + (p.business ? ', ' + p.business : '');
-    $('.hcp-sps__name').textContent = p.card;
-    $('.hcp-sps__biz').textContent = p.business;
     $('.hcp-sps__quote p').textContent = '“' + p.quote + '”';
     $('.hcp-sps__blurb').textContent = p.blurb;
     var av = $('.hcp-sps__avatar');
