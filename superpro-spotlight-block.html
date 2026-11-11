@@ -1,0 +1,351 @@
+<!--
+  SUPERPRO SPOTLIGHT — paste this whole file into a WordPress "Custom HTML" block.
+
+  The only line you need to edit is data-xlsx below: set it to the Media Library URL of
+  superpro-spotlight.xlsx. Photos are found in the same folder as the .xlsx unless the
+  sheet's Settings tab gives a different "Image folder URL".
+
+  Preview any week: add ?superpro-date=2027-01-04 to the page URL.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+<section class="hcp-sps" aria-labelledby="hcp-sps-title" data-state="loading"
+  data-xlsx="https://www.housecallpro.com/wp-content/uploads/2026/11/superpro-spotlight.xlsx"
+  data-sheetjs="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.mini.min.js">
+  <div class="hcp-sps__inner">
+    <h2 class="hcp-sps__title" id="hcp-sps-title">Superpro spotlight</h2>
+
+    <figure class="hcp-sps__card">
+      <img class="hcp-sps__photo" alt="" decoding="async">
+      <figcaption class="hcp-sps__caption">
+        <span class="hcp-sps__name"></span>
+        <span class="hcp-sps__biz"></span>
+      </figcaption>
+    </figure>
+
+    <div class="hcp-sps__body">
+      <blockquote class="hcp-sps__quote"><p></p></blockquote>
+      <ul class="hcp-sps__chips" aria-label="About this Pro"></ul>
+      <button type="button" class="hcp-sps__cta" aria-haspopup="dialog">Read their story</button>
+    </div>
+  </div>
+
+  <dialog class="hcp-sps-lb" aria-labelledby="hcp-sps-lb-title">
+    <div class="hcp-sps-lb__panel">
+      <button type="button" class="hcp-sps-lb__close" aria-label="Close story">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      </button>
+      <div class="hcp-sps-lb__media"><img alt="" decoding="async"></div>
+      <article class="hcp-sps-lb__story">
+        <p class="hcp-sps-lb__eyebrow"></p>
+        <h2 class="hcp-sps-lb__title" id="hcp-sps-lb-title"></h2>
+        <p class="hcp-sps-lb__meta"></p>
+        <ul class="hcp-sps-lb__tags"></ul>
+        <p class="hcp-sps-lb__intro"></p>
+        <blockquote class="hcp-sps-lb__pull"><p></p></blockquote>
+        <div class="hcp-sps-lb__sections"></div>
+        <blockquote class="hcp-sps-lb__pull hcp-sps-lb__pull--close"><p></p></blockquote>
+        <aside class="hcp-sps-lb__nominate">
+          <p class="hcp-sps-lb__nom-title"></p>
+          <p>Nominate someone doing exceptional work in the community.</p>
+          <a class="hcp-sps-lb__nom-link" hidden>Nominate a Pro</a>
+        </aside>
+      </article>
+    </div>
+  </dialog>
+</section>
+
+<style>
+.hcp-sps{
+  --sps-ink:#F0F4F7; --sps-body:#E3EAF0; --sps-line:rgba(204,213,219,.75); --sps-accent:#FF9B24;
+  --sps-btn:#0065C1; --sps-btn-hover:#0057A8; --sps-bg-1:#173563; --sps-bg-2:#1E4A85; --sps-bg-3:#285C99;
+  position:relative; isolation:isolate; overflow:hidden; color:var(--sps-ink);
+  font-family:Manrope,system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E"),
+    radial-gradient(120% 140% at 85% 30%, var(--sps-bg-3) 0%, transparent 60%),
+    linear-gradient(110deg, var(--sps-bg-1) 0%, var(--sps-bg-2) 60%, var(--sps-bg-3) 100%);
+  background-color:var(--sps-bg-1);
+  padding:clamp(48px,7vw,96px) 16px;
+}
+.hcp-sps *,.hcp-sps *::before,.hcp-sps *::after{box-sizing:border-box}
+.hcp-sps[data-state="loading"] .hcp-sps__inner{visibility:hidden}
+.hcp-sps[data-state="error"]{display:none}
+.hcp-sps__inner{
+  max-width:1120px; margin:0 auto; display:grid; align-items:center;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr); column-gap:clamp(40px,7vw,112px);
+  grid-template-areas:"title card" "body card";
+  grid-template-rows:auto 1fr; min-height:clamp(280px,32vw,420px);
+}
+.hcp-sps__title{grid-area:title; align-self:end; margin:0 0 clamp(20px,2.2vw,32px); color:var(--sps-ink);
+  font-weight:800; font-size:clamp(32px,3.6vw,52px); line-height:1.1; font-family:inherit; letter-spacing:-.01em}
+.hcp-sps__body{grid-area:body; align-self:start}
+.hcp-sps__quote{margin:0; padding:0; border:0}
+.hcp-sps__quote p{margin:0; color:var(--sps-body); font-weight:400; font-size:clamp(17px,1.45vw,21px); line-height:1.55; font-family:inherit; max-width:34em}
+.hcp-sps__chips{list-style:none; margin:clamp(20px,2vw,28px) 0 0; padding:0; display:flex; flex-wrap:wrap; gap:10px}
+.hcp-sps__chips li{border:1.5px solid var(--sps-line); color:var(--sps-ink); border-radius:6px; padding:5px 14px;
+  font-weight:500; font-size:15px; line-height:1.4; font-family:inherit; letter-spacing:.04em}
+.hcp-sps__chips li.is-accent{border-color:var(--sps-accent); color:var(--sps-accent)}
+.hcp-sps__cta{margin-top:clamp(32px,3.6vw,48px); display:inline-flex; align-items:center; min-height:52px;
+  padding:14px 30px; border:0; border-radius:999px; background:var(--sps-btn); color:#fff; cursor:pointer;
+  font-weight:700; font-size:clamp(17px,1.4vw,19px); line-height:1.2; font-family:inherit; transition:background-color .15s, transform .15s}
+.hcp-sps__cta:hover{background:var(--sps-btn-hover)}
+.hcp-sps__cta:active{transform:translateY(1px)}
+.hcp-sps__cta:focus-visible,.hcp-sps-lb__close:focus-visible,.hcp-sps-lb__nom-link:focus-visible{outline:3px solid var(--sps-accent); outline-offset:3px}
+.hcp-sps__card{grid-area:card; position:relative; margin:0; border-radius:clamp(16px,1.8vw,24px); overflow:hidden;
+  aspect-ratio:3/2; background:#0E2747; box-shadow:0 24px 60px rgba(4,16,36,.35)}
+.hcp-sps__photo{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block}
+.hcp-sps__caption{position:absolute; inset:auto 0 0 0; padding:clamp(56px,7vw,96px) clamp(16px,2vw,28px) clamp(16px,2vw,26px);
+  background:linear-gradient(to top, rgba(10,14,18,.82) 0%, rgba(10,14,18,.55) 45%, rgba(10,14,18,0) 100%);
+  display:flex; flex-direction:column; gap:4px; color:#fff}
+.hcp-sps__name{font-weight:800; font-size:clamp(24px,2.5vw,34px); line-height:1.1; font-family:inherit}
+.hcp-sps__biz{font-weight:500; font-size:clamp(15px,1.4vw,19px); line-height:1.3; font-family:inherit; opacity:.95}
+
+@media (max-width:860px){
+  .hcp-sps__inner{grid-template-columns:minmax(0,1fr); grid-template-areas:"title" "card" "body"; grid-template-rows:auto; min-height:0}
+  .hcp-sps__title{align-self:start}
+  .hcp-sps__card{margin-bottom:28px; aspect-ratio:4/3}
+  .hcp-sps__cta{width:100%; justify-content:center}
+}
+
+/* ---------- Lightbox ---------- */
+.hcp-sps-lb{
+  --lb-bg:#FFFFFF; --lb-ink:#13181A; --lb-mute:#4A5763; --lb-line:#DDE3EA; --lb-accent:#0065C1; --lb-soft:#F0F4F7;
+  padding:0; border:0; margin:auto; width:min(1080px, calc(100vw - 32px)); max-width:none;
+  max-height:min(860px, calc(100dvh - 48px)); border-radius:20px; overflow:hidden; background:var(--lb-bg); color:var(--lb-ink);
+  font-family:Manrope,system-ui,-apple-system,"Segoe UI",sans-serif; box-shadow:0 30px 80px rgba(0,0,0,.45);
+}
+.hcp-sps-lb::backdrop{background:rgba(8,18,32,.72); backdrop-filter:blur(3px)}
+.hcp-sps-lb[open]{animation:hcp-sps-in .22s ease-out}
+@keyframes hcp-sps-in{from{opacity:0; transform:translateY(12px) scale(.985)} to{opacity:1; transform:none}}
+@media (prefers-reduced-motion:reduce){.hcp-sps-lb[open]{animation:none}}
+.hcp-sps-lb *{box-sizing:border-box}
+.hcp-sps-lb__panel{display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); max-height:inherit; position:relative}
+.hcp-sps-lb__media{position:relative; background:#0E2747; min-height:100%}
+.hcp-sps-lb__media img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block}
+.hcp-sps-lb__story{overflow-y:auto; max-height:min(860px, calc(100dvh - 48px)); padding:clamp(28px,4vw,52px) clamp(22px,4vw,52px) clamp(28px,3.5vw,44px);
+  overscroll-behavior:contain}
+.hcp-sps-lb__close{position:absolute; top:14px; right:14px; z-index:2; width:44px; height:44px; border-radius:999px; border:0;
+  display:grid; place-items:center; cursor:pointer; background:var(--lb-soft); color:var(--lb-ink)}
+.hcp-sps-lb__close:hover{background:#E1E8EE}
+.hcp-sps-lb__eyebrow{margin:0 0 8px; color:var(--lb-accent); font-weight:700; font-size:13px; line-height:1.3; font-family:inherit; letter-spacing:.08em; text-transform:uppercase}
+.hcp-sps-lb__title{margin:0 48px 6px 0; font-weight:800; font-size:clamp(26px,2.6vw,36px); line-height:1.15; font-family:inherit; letter-spacing:-.01em; color:var(--lb-ink)}
+.hcp-sps-lb__meta{margin:0; color:var(--lb-mute); font-weight:500; font-size:16px; line-height:1.45; font-family:inherit}
+.hcp-sps-lb__tags{list-style:none; padding:0; margin:16px 0 0; display:flex; flex-wrap:wrap; gap:8px}
+.hcp-sps-lb__tags li{border:1px solid var(--lb-line); border-radius:999px; padding:3px 12px; font-weight:500; font-size:13px; line-height:1.4; font-family:inherit; color:var(--lb-ink)}
+.hcp-sps-lb__intro{margin:22px 0 0; font-weight:400; font-size:17px; line-height:1.65; font-family:inherit; color:var(--lb-ink)}
+.hcp-sps-lb__pull{margin:26px 0; padding:2px 0 2px 18px; border-left:4px solid var(--lb-accent)}
+.hcp-sps-lb__pull p{margin:0; font-weight:700; font-size:clamp(19px,1.7vw,22px); line-height:1.45; font-family:inherit; font-style:italic; color:var(--lb-ink)}
+.hcp-sps-lb__sections h3{margin:26px 0 6px; font-weight:700; font-size:19px; line-height:1.35; font-family:inherit; color:var(--lb-ink)}
+.hcp-sps-lb__sections p{margin:0; font-weight:400; font-size:16px; line-height:1.7; font-family:inherit; color:#2A343B}
+.hcp-sps-lb__pull--close{margin-top:30px}
+.hcp-sps-lb__nominate{margin-top:28px; padding:18px 20px; border-radius:12px; background:var(--lb-soft)}
+.hcp-sps-lb__nominate p{margin:0; font-weight:400; font-size:15px; line-height:1.55; font-family:inherit; color:var(--lb-mute)}
+.hcp-sps-lb__nominate .hcp-sps-lb__nom-title{font-weight:700; color:var(--lb-ink); margin-bottom:2px}
+.hcp-sps-lb__nom-link{display:inline-block; margin-top:10px; color:var(--lb-accent); font-weight:700; font-size:15px; line-height:1.4; font-family:inherit; text-decoration:underline; text-underline-offset:3px}
+.hcp-sps-lb [hidden]{display:none!important}
+@media (max-width:760px){
+  .hcp-sps-lb{width:100vw; max-height:100dvh; height:100dvh; border-radius:0}
+  .hcp-sps-lb__panel{display:block; height:100%; overflow-y:auto; max-height:none}
+  .hcp-sps-lb__media{min-height:0; aspect-ratio:4/3}
+  .hcp-sps-lb__story{max-height:none; overflow:visible; padding:24px 20px 40px}
+  .hcp-sps-lb__close{position:fixed; top:12px; right:12px; background:rgba(255,255,255,.95); box-shadow:0 2px 10px rgba(0,0,0,.25)}
+  .hcp-sps-lb__title{margin-right:0}
+}
+</style>
+
+<script>
+(function(){
+  var root = document.currentScript && document.currentScript.previousElementSibling;
+  while (root && !(root.classList && root.classList.contains('hcp-sps'))) root = root.previousElementSibling;
+  if (!root) root = document.querySelector('.hcp-sps[data-state="loading"]');
+  if (!root) return;
+
+  var DEFAULT_START = '2026-11-09';           // Row 1's first Monday (overridden by the Settings tab)
+  var TZ = 'America/New_York';                // The Pro changes at 12:00am Monday in this time zone
+  var xlsxUrl = root.getAttribute('data-xlsx');
+  var sheetjsUrl = root.getAttribute('data-sheetjs');
+  var $ = function(sel, el){ return (el || root).querySelector(sel); };
+  var dlg = $('.hcp-sps-lb');
+  var state = { pros: [], settings: {}, current: null, base: '' };
+
+  function key(s){ return String(s == null ? '' : s).toLowerCase().replace(/[^a-z0-9]/g, ''); }
+  function txt(v){ return String(v == null ? '' : v).trim(); }
+  function unquote(s){ return txt(s).replace(/^["“”']+|["“”']+$/g, '').trim(); }
+
+  function loadScript(src){
+    return new Promise(function(res, rej){
+      if (window.XLSX) return res();
+      var s = document.createElement('script'); s.src = src; s.async = true;
+      s.onload = res; s.onerror = function(){ rej(new Error('Could not load ' + src)); };
+      document.head.appendChild(s);
+    });
+  }
+
+  // ---- dates: work in whole days, as UTC midnights
+  function ymdToDay(y, m, d){ return Date.UTC(y, m - 1, d) / 864e5; }
+  function parseDay(v){
+    if (v == null || v === '') return null;
+    if (typeof v === 'number') return Math.floor(v) - 25569;              // Excel serial → days since 1970
+    if (v instanceof Date) return ymdToDay(v.getFullYear(), v.getMonth() + 1, v.getDate());
+    var s = txt(v), m;
+    if ((m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/))) return ymdToDay(+m[1], +m[2], +m[3]);
+    if ((m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})/))) return ymdToDay(m[3].length === 2 ? 2000 + +m[3] : +m[3], +m[1], +m[2]);
+    var t = Date.parse(s); return isNaN(t) ? null : ymdToDay(new Date(t).getFullYear(), new Date(t).getMonth() + 1, new Date(t).getDate());
+  }
+  function todayInTZ(){
+    var p = {}; new Intl.DateTimeFormat('en-US', { timeZone: TZ, year: 'numeric', month: 'numeric', day: 'numeric' })
+      .formatToParts(new Date()).forEach(function(x){ p[x.type] = x.value; });
+    return ymdToDay(+p.year, +p.month, +p.day);
+  }
+  function weekIndex(todayDay, startDay, n){
+    var w = Math.floor((todayDay - startDay) / 7);
+    return ((w % n) + n) % n;
+  }
+
+  // ---- read the workbook
+  function parseWorkbook(wb){
+    var pick = function(name){
+      var hit = wb.SheetNames.filter(function(n){ return key(n) === key(name); })[0];
+      return hit ? wb.Sheets[hit] : null;
+    };
+    var settings = {};
+    var ss = pick('Settings');
+    if (ss) XLSX.utils.sheet_to_json(ss, { header: 1, raw: true, defval: '' }).forEach(function(r){
+      if (r[0] !== '') settings[key(r[0])] = r[1];
+    });
+    var ps = pick('Pros') || wb.Sheets[wb.SheetNames[0]];
+    var rows = XLSX.utils.sheet_to_json(ps, { raw: true, defval: '' }).map(function(r){
+      var o = {}; Object.keys(r).forEach(function(k){ o[key(k)] = r[k]; }); return o;
+    });
+    var pros = rows.filter(function(r){
+      return txt(r.fullname) && key(r.show) !== 'n';
+    }).map(function(r){
+      var secs = [1, 2, 3].map(function(i){ return { h: txt(r['section' + i + 'heading']), p: txt(r['section' + i + 'text']) }; })
+        .filter(function(s){ return s.h || s.p; });
+      return {
+        name: txt(r.fullname), card: txt(r.cardname) || txt(r.fullname), first: txt(r.buttonname) || txt(r.fullname).split(' ')[0],
+        business: txt(r.business), location: txt(r.location), trade: txt(r.trade), role: txt(r.role),
+        years: txt(r.yearsinbusiness), techs: txt(r.technicians), quote: unquote(r.spotlightquote),
+        image: txt(r.imagefile), focus: txt(r.imagefocus) || '50% 40%', intro: txt(r.storyintro),
+        tags: txt(r.storytags).split(',').map(txt).filter(Boolean), pull: unquote(r.storypullquote), sections: secs,
+        closing: unquote(r.closingquote)
+      };
+    });
+    return { pros: pros, settings: settings };
+  }
+
+  function imgUrl(v){
+    if (!v) return '';
+    if (/^(https?:)?\/\//i.test(v) || v.charAt(0) === '/') return v;
+    return state.base + v.split('/').map(encodeURIComponent).join('/');
+  }
+  function plural(v, one, many){
+    if (!/^\d+(\.\d+)?$/.test(v)) return v;              // free text: show as typed
+    return v + ' ' + (+v === 1 ? one : many);
+  }
+
+  // ---- render
+  function render(p){
+    state.current = p;
+    var ph = $('.hcp-sps__photo');
+    ph.src = imgUrl(p.image); ph.style.objectPosition = p.focus;
+    ph.alt = p.name + (p.business ? ', ' + p.business : '');
+    $('.hcp-sps__name').textContent = p.card;
+    $('.hcp-sps__biz').textContent = p.business;
+    $('.hcp-sps__quote p').textContent = '“' + p.quote + '”';
+    var chips = $('.hcp-sps__chips'); chips.textContent = '';
+    [[p.trade, true], [p.role], [p.years && plural(p.years, 'yr in business', 'yrs in business')], [p.techs && plural(p.techs, 'technician', 'technicians')]]
+      .forEach(function(c){ if (!c[0]) return; var li = document.createElement('li'); li.textContent = c[0]; if (c[1]) li.className = 'is-accent'; chips.appendChild(li); });
+    $('.hcp-sps__cta').textContent = 'Read ' + p.first + '’s story';
+    root.setAttribute('data-state', 'ready');
+  }
+
+  function fillStory(p){
+    var heading = txt(state.settings.sectionheading) || 'Superpro spotlight';
+    var img = $('.hcp-sps-lb__media img', dlg);
+    img.src = imgUrl(p.image); img.style.objectPosition = p.focus; img.alt = p.name;
+    $('.hcp-sps-lb__eyebrow', dlg).textContent = heading;
+    $('.hcp-sps-lb__title', dlg).textContent = p.name;
+    $('.hcp-sps-lb__meta', dlg).textContent = [p.business, p.location].filter(Boolean).join(' · ');
+    var tags = $('.hcp-sps-lb__tags', dlg); tags.textContent = '';
+    p.tags.forEach(function(t){ var li = document.createElement('li'); li.textContent = t; tags.appendChild(li); });
+    tags.hidden = !p.tags.length;
+    var intro = $('.hcp-sps-lb__intro', dlg); intro.textContent = p.intro; intro.hidden = !p.intro;
+    var pulls = dlg.querySelectorAll('.hcp-sps-lb__pull');
+    pulls[0].querySelector('p').textContent = '“' + (p.pull || p.quote) + '”';
+    pulls[1].querySelector('p').textContent = p.closing ? '“' + p.closing + '”' : '';
+    pulls[1].hidden = !p.closing;
+    var secs = $('.hcp-sps-lb__sections', dlg); secs.textContent = '';
+    p.sections.forEach(function(s){
+      if (s.h){ var h = document.createElement('h3'); h.textContent = s.h; secs.appendChild(h); }
+      if (s.p){ s.p.split(/\n\s*\n/).forEach(function(par){ var e = document.createElement('p'); e.textContent = par.trim(); secs.appendChild(e); }); }
+    });
+    $('.hcp-sps-lb__nom-title', dlg).textContent = 'Know a Pro like ' + p.first + '?';
+    var link = $('.hcp-sps-lb__nom-link', dlg), href = txt(state.settings.nominatelink);
+    if (href){ link.href = href; link.hidden = false; } else { link.removeAttribute('href'); link.hidden = true; }
+  }
+
+  // ---- lightbox
+  var lastFocus = null, prevOverflow = '';
+  function openStory(){
+    if (!state.current) return;
+    fillStory(state.current);
+    lastFocus = document.activeElement;
+    prevOverflow = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = 'hidden';
+    if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', '');
+    var sc = $('.hcp-sps-lb__story', dlg); if (sc) sc.scrollTop = 0;
+    var pn = $('.hcp-sps-lb__panel', dlg); if (pn) pn.scrollTop = 0;
+    $('.hcp-sps-lb__close', dlg).focus();
+  }
+  function closeStory(){ if (dlg.open) { if (dlg.close) dlg.close(); else dlg.removeAttribute('open'); } }
+  dlg.addEventListener('close', function(){
+    document.documentElement.style.overflow = prevOverflow;
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  });
+  dlg.addEventListener('click', function(e){ if (e.target === dlg) closeStory(); });
+  $('.hcp-sps-lb__close', dlg).addEventListener('click', closeStory);
+  $('.hcp-sps__cta').addEventListener('click', openStory);
+  $('.hcp-sps__card').addEventListener('click', openStory);
+  $('.hcp-sps__card').style.cursor = 'pointer';
+
+  // ---- pick this week's Pro
+  function pickFor(dayOverride){
+    var n = state.pros.length; if (!n) throw new Error('No Pros in the sheet');
+    var start = parseDay(state.settings.rotationstartmonday) ;
+    if (start == null) start = parseDay(DEFAULT_START);
+    var today = dayOverride != null ? dayOverride : todayInTZ();
+    state.index = weekIndex(today, start, n); state.start = start;
+    return state.pros[state.index];
+  }
+  function override(){
+    var m = location.search.match(/[?&]superpro-date=([^&]+)/);
+    return m ? parseDay(decodeURIComponent(m[1])) : null;
+  }
+
+  loadScript(sheetjsUrl)
+    .then(function(){ return fetch(xlsxUrl, { cache: 'no-cache' }); })
+    .then(function(r){ if (!r.ok) throw new Error('Spreadsheet request failed: ' + r.status); return r.arrayBuffer(); })
+    .then(function(buf){
+      var parsed = parseWorkbook(XLSX.read(buf, { type: 'array' }));
+      state.pros = parsed.pros; state.settings = parsed.settings;
+      var folder = txt(parsed.settings.imagefolderurl);
+      state.base = folder ? folder.replace(/\/?$/, '/') : new URL('.', new URL(xlsxUrl, location.href)).href;
+      render(pickFor(override()));
+    })
+    .catch(function(err){
+      root.setAttribute('data-state', 'error');
+      if (window.console) console.warn('[Superpro spotlight]', err);
+    });
+
+  // Hook for QA: hcpSuperproSpotlight.preview('2027-01-04')
+  window.hcpSuperproSpotlight = {
+    preview: function(dateStr){ render(pickFor(parseDay(dateStr))); return state.current && state.current.name; },
+    pros: function(){ return state.pros.slice(); },
+    info: function(){ return { row: state.index + 1, total: state.pros.length, startDay: state.start, todayDay: todayInTZ(), name: state.current && state.current.name }; }
+  };
+})();
+</script>
