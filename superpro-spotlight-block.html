@@ -2,8 +2,9 @@
   SUPERPRO SPOTLIGHT — paste this whole file into a WordPress "Custom HTML" block.
 
   The only line you need to edit is data-xlsx below: set it to the Media Library URL of
-  superpro-spotlight.xlsx. Photos are found in the same folder as the .xlsx unless the
-  sheet's Settings tab gives a different "Image folder URL".
+  superpro-spotlight.xlsx. Photos are found in the same folder as the .xlsx, unless
+  data-images below (or the sheet's Settings tab, "Image folder URL") names another folder.
+  Relative paths work too, e.g. data-xlsx="superpro-spotlight.xlsx" data-images="images/".
 
   Preview any week: add ?superpro-date=2027-01-04 to the page URL.
 -->
@@ -12,7 +13,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
 
 <section class="hcp-sps" aria-labelledby="hcp-sps-title" data-state="loading"
-  data-xlsx="/superpro-spotlight.xlsx"
+  data-xlsx="https://www.housecallpro.com/wp-content/uploads/2026/11/superpro-spotlight.xlsx"
+  data-images=""
   data-sheetjs="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.mini.min.js">
   <div class="hcp-sps__inner">
     <h2 class="hcp-sps__title" id="hcp-sps-title">Superpro spotlight</h2>
@@ -332,8 +334,9 @@
     .then(function(buf){
       var parsed = parseWorkbook(XLSX.read(buf, { type: 'array' }));
       state.pros = parsed.pros; state.settings = parsed.settings;
-      var folder = txt(parsed.settings.imagefolderurl);
-      state.base = folder ? folder.replace(/\/?$/, '/') : new URL('.', new URL(xlsxUrl, location.href)).href;
+      // Photo folder: data-images on this block wins, then the sheet's Settings tab, then the .xlsx file's own folder.
+      var folder = txt(root.getAttribute('data-images')) || txt(parsed.settings.imagefolderurl);
+      state.base = folder ? new URL(folder.replace(/\/?$/, '/'), location.href).href : new URL('.', new URL(xlsxUrl, location.href)).href;
       render(pickFor(override()));
     })
     .catch(function(err){
