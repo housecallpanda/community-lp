@@ -16,6 +16,7 @@
 <section class="hcp-sps" aria-labelledby="hcp-sps-title" data-state="loading"
   data-xlsx="superpro-spotlight.xlsx"
   data-images="images/"
+  data-headshots="headshots/"
   data-sheetjs="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.mini.min.js">
   <div class="hcp-sps__inner">
     <div class="hcp-sps__head">
@@ -254,10 +255,10 @@
     return { pros: pros, settings: settings };
   }
 
-  function imgUrl(v){
+  function imgUrl(v, base){
     if (!v) return '';
     if (/^(https?:)?\/\//i.test(v) || v.charAt(0) === '/') return v;
-    return state.base + v.split('/').map(encodeURIComponent).join('/');
+    return (base || state.base) + v.split('/').map(encodeURIComponent).join('/');
   }
   function plural(v, one, many){
     if (!/^\d+(\.\d+)?$/.test(v)) return v;              // free text: show as typed
@@ -273,7 +274,7 @@
     $('.hcp-sps__quote p').textContent = '“' + p.quote + '”';
     $('.hcp-sps__blurb').textContent = p.blurb;
     var av = $('.hcp-sps__avatar');
-    av.src = imgUrl(p.headshot || p.image); av.style.objectPosition = p.headshot ? '50% 50%' : p.focus;
+    av.src = p.headshot ? imgUrl(p.headshot, state.headshotBase) : imgUrl(p.image); av.style.objectPosition = p.headshot ? '50% 50%' : p.focus;
     $('.hcp-sps__by-name').textContent = p.name;
     $('.hcp-sps__by-biz').textContent = [p.business, p.trade].filter(Boolean).join(' · ');
     var tag = txt(state.settings.cardtag); $('.hcp-sps__tag').textContent = state.settings.hasOwnProperty('cardtag') ? tag : 'Pro of the Week';
@@ -357,6 +358,9 @@
       // Photo folder: data-images on this block wins, then the sheet's Settings tab, then the .xlsx file's own folder.
       var folder = txt(root.getAttribute('data-images')) || txt(parsed.settings.imagefolderurl);
       state.base = folder ? new URL(folder.replace(/\/?$/, '/'), location.href).href : new URL('.', new URL(xlsxUrl, location.href)).href;
+      // Headshot folder: data-headshots on this block, otherwise the same folder as the photos.
+      var hs = txt(root.getAttribute('data-headshots'));
+      state.headshotBase = hs ? new URL(hs.replace(/\/?$/, '/'), location.href).href : state.base;
       render(pickFor(override()));
     })
     .catch(function(err){
