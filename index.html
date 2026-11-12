@@ -71,14 +71,10 @@
 <style>
 .hcp-sps{
   --sps-ink:#F0F4F7; --sps-body:#E3EAF0; --sps-muted:#CCD5DB; --sps-line:rgba(204,213,219,.75); --sps-accent:#FF9B24;
-  --sps-btn:#0065C1; --sps-btn-hover:#0057A8; --sps-bg-1:#173563; --sps-bg-2:#1E4A85; --sps-bg-3:#285C99;
+  --sps-btn:#0065C1; --sps-btn-hover:#0057A8; --sps-bg:#133A69;
   position:relative; isolation:isolate; overflow:hidden; color:var(--sps-ink);
   font-family:Manrope,system-ui,-apple-system,"Segoe UI",sans-serif;
-  background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E"),
-    radial-gradient(120% 140% at 85% 30%, var(--sps-bg-3) 0%, transparent 60%),
-    linear-gradient(110deg, var(--sps-bg-1) 0%, var(--sps-bg-2) 60%, var(--sps-bg-3) 100%);
-  background-color:var(--sps-bg-1);
+  background:var(--sps-bg);
   padding:clamp(48px,7vw,96px) 16px;
 }
 .hcp-sps *,.hcp-sps *::before,.hcp-sps *::after{box-sizing:border-box}
@@ -118,7 +114,7 @@
 .hcp-sps__cta:active{transform:translateY(1px)}
 .hcp-sps__cta:focus-visible,.hcp-sps-lb__close:focus-visible,.hcp-sps-lb__nom-link:focus-visible{outline:3px solid var(--sps-accent); outline-offset:3px}
 .hcp-sps__card{grid-area:card; position:relative; margin:0; border-radius:8px; overflow:hidden;
-  aspect-ratio:3/2; background:#0E2747; box-shadow:0 24px 60px rgba(4,16,36,.35)}
+  aspect-ratio:3/2; background:#0E2747}
 .hcp-sps__photo{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block}
 
 @media (max-width:860px){
